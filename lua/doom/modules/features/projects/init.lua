@@ -39,7 +39,7 @@ projects.packages = {
   ["project.nvim"] = {
     "ahmedkhalf/project.nvim",
     commit = "685bc8e3890d2feb07ccf919522c97f7d33b94e4",
-    cmd = "Telescope projects",
+    -- cmd = "Telescope projects",
     dependencies =  { "nvim-treesitter/nvim-treesitter" },
   },
 }
@@ -49,8 +49,7 @@ projects.requires_modules = { "features.telescope" }
 projects.configs = {}
 projects.configs["project.nvim"] = function()
   require("project_nvim").setup(doom.features.projects.settings)
-
-  table.insert(doom.features.telescope.settings.extensions, "projects")
+  require('telescope').load_extension('projects')
 end
 
 projects.binds = {

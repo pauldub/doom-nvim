@@ -60,7 +60,7 @@ telescope.packages = {
     keys = "<leader>.",
     dependencies = {"nvim-telescope/telescope.nvim"},
     -- after = "telescope.nvim",
-    lazy = true,
+    lazy = false,
   },
 }
 
