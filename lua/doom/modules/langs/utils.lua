@@ -89,7 +89,21 @@ module.use_null_ls = function(package_name, null_ls_path, configure_function)
     end
 
     -- If auto_install module is enabled, try to install package before starting
-    if doom.features.auto_install and package_name ~= nil then
+    local auto_install_enabled = function(server_name)
+      local auto_install = doom.features.auto_install
+      if auto_install == nil then
+        return false
+      end
+
+      if server_name == nil then
+        return false
+      end
+
+      local mason_lspconfig = require("mason-lspconfig.lspconfig_hooks")
+      return mason_lspconfig.should_auto_install(server_name)
+    end
+
+    if auto_install_enabled(server_name) then
       module.use_mason_package(package_name, start_null_ls, on_error)
     else
       vim.defer_fn(function()
